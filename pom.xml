@@ -10,7 +10,7 @@
     </parent>
     <groupId>nl.novi</groupId>
     <artifactId>garageapi</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>3.1</version>
     <name>garageapi</name>
     <description>garageapi</description>
     <url/>
