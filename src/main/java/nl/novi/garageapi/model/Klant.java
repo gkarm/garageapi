@@ -1,36 +1,36 @@
 package nl.novi.garageapi.model;
 
-//public class Monteur {
-//}
-
-
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
-@Table(name = "monteurs")
-
-public class Monteur {
+@Table(name = "klanten")
+public class Klant {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="first_name", length = 128)
+    @Column(name = "first_name", length = 128)
     private String firstName;
 
-    @Column(name="last_name", length = 128)
+    @Column(name = "last_name", length = 128)
     private String lastName;
 
     private LocalDate dob;
 
-    @ManyToMany(mappedBy = "monteurs")
-    private Set<Auto> autos = new HashSet<>();
+    @Column(length = 15)
+    private String phone;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "klant")
+    private List<Auto> autos;
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -57,11 +57,19 @@ public class Monteur {
         this.dob = dob;
     }
 
-    public Set<Auto> getAutos() {
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public List<Auto> getAutos() {
         return autos;
     }
 
-    public void setId(long l) {
-
+    public void setAutos(List<Auto> autos) {
+        this.autos = autos;
     }
 }
