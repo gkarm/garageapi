@@ -2,7 +2,7 @@ package nl.novi.garageapi.service;
 
 
 
-import nl.novi.garageapi.security.MyUserDetails;
+import nl.novi.garageapi.Security.MyUserDetails;
 import nl.novi.garageapi.dto.MonteurDto;
 import nl.novi.garageapi.enumeration.UserRole;
 import nl.novi.garageapi.exception.ForbiddenException;

@@ -3,7 +3,7 @@ package nl.novi.garageapi.controller;
 
 
 import jakarta.validation.Valid;
-import nl.novi.garageapi.security.MyUserDetails;
+import nl.novi.garageapi.Security.MyUserDetails;
 import nl.novi.garageapi.dto.UserDto;
 import nl.novi.garageapi.dto.UserInputDto;
 import nl.novi.garageapi.service.UserService;

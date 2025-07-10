@@ -1,4 +1,4 @@
-package nl.novi.garageapi.security;
+package nl.novi.garageapi.Security;
 
 
 

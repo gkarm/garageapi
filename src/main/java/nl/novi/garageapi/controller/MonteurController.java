@@ -3,7 +3,7 @@ package nl.novi.garageapi.controller;
 
 
 import jakarta.validation.Valid;
-import nl.novi.garageapi.security.MyUserDetails;
+import nl.novi.garageapi.Security.MyUserDetails;
 import nl.novi.garageapi.dto.MonteurDto;
 import nl.novi.garageapi.model.Monteur;
 import nl.novi.garageapi.service.MonteurService;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
