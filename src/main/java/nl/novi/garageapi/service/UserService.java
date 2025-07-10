@@ -2,12 +2,11 @@ package nl.novi.garageapi.service;
 
 
 
-import nl.novi.garageapi.security.MyUserDetails;
+import nl.novi.garageapi.Security.MyUserDetails;
 import nl.novi.garageapi.dto.UserDto;
 import nl.novi.garageapi.dto.UserInputDto;
 import nl.novi.garageapi.enumeration.UserRole;
 import nl.novi.garageapi.exception.ForbiddenException;
-import nl.novi.garageapi.exception.GlobalExceptionHandler;
 import nl.novi.garageapi.exception.ResourceNotFoundException;
 import nl.novi.garageapi.model.User;
 import nl.novi.garageapi.repository.UserRepository;
