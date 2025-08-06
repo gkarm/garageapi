@@ -1,7 +1,6 @@
 package nl.novi.garageapi.dto;
 
-//public class MonteurDto {
-//}
+
 
 
 import jakarta.persistence.Column;

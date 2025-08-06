@@ -66,7 +66,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/keuringen").authenticated()
                         .requestMatchers(HttpMethod.GET, "/keuringen/{id}").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/keuringen/{id}").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/monteurs").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/monteurs").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/monteurs/{id}").authenticated()
                         .requestMatchers(HttpMethod.POST, "/onderdelen").authenticated()
                         .requestMatchers(HttpMethod.GET, "/onderdelen/{id}").authenticated()

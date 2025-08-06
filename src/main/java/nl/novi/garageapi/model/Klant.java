@@ -1,5 +1,6 @@
 package nl.novi.garageapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -23,6 +24,7 @@ public class Klant {
     @Column(length = 15)
     private String phone;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "klant")
+    @JsonIgnore
     private List<Auto> autos;
 
     public Long getId() {

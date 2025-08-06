@@ -1,7 +1,6 @@
 package nl.novi.garageapi.model;
 
-//public class Monteur {
-//}
+
 
 
 import jakarta.persistence.*;

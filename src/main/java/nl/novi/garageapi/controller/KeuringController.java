@@ -25,16 +25,23 @@ public class KeuringController {
     public KeuringController(KeuringService keuringService) {
         this.service = keuringService;
     }
+
     @GetMapping
     public ResponseEntity<List<KeuringDto>> getAllKeuringen() {
         List<KeuringDto> keuringen = service.getAllKeuringen();
         return new ResponseEntity<>(keuringen, HttpStatus.OK);
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity <KeuringDto> getKeuringById(@PathVariable Long id) {
-        Keuring Keuring = new Keuring();
-        return ResponseEntity.ok(service.keuringDtoFromKeuring(Keuring));
+    public ResponseEntity<KeuringDto> getKeuringById(@PathVariable Long id) {
+        Keuring keuring = service.getKeuringById(id);
+        if (keuring == null) {
+            return ResponseEntity.notFound().build();
+        }
+        KeuringDto dto = service.keuringDtoFromKeuring(keuring);
+        return ResponseEntity.ok(dto);
     }
+
     @PostMapping
     public ResponseEntity<Object> addKeuring(@Valid @RequestBody Keuring keuringDto, BindingResult br) {
         if (br.hasFieldErrors()) {
@@ -62,10 +69,5 @@ public class KeuringController {
         service.deleteKeuring(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-
-
-
-
 
 }
