@@ -47,7 +47,7 @@ public class MonteurController {
 
 
     @PostMapping
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Object> createMonteur(@AuthenticationPrincipal MyUserDetails myUserDetails, @Valid @RequestBody MonteurDto monteurDto, BindingResult br) {
 
         if (br.hasFieldErrors()) {
