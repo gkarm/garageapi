@@ -60,6 +60,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST,"/users").permitAll()
                         .requestMatchers(HttpMethod.GET, "/users/{id}").authenticated()
                         .requestMatchers(HttpMethod.POST, "/auth").permitAll()
+
                         .requestMatchers(HttpMethod.POST, "/admedewerkers").authenticated()
                         .requestMatchers(HttpMethod.GET, "/admedewerkers/{id}").authenticated()
                         .requestMatchers(HttpMethod.GET, "/keuringen/{id}").authenticated()
