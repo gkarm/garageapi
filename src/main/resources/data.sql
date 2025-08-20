@@ -1,3 +1,5 @@
+
+insert into users(user_name, password, user_role) VALUES ('kaku', '$2a$12$.JqkcIzertzDuW8aRv6muOn1Yjs0XGEf1auDuuKlyvhXwt8IXpkSm','{1}');
 insert into monteurs (first_name, last_name, dob) VALUES ('Jan', 'Jansen', '1985-03-15');
 insert into klanten (first_name, last_name, dob, phone) VALUES ('Kesse','Serge', '1980-05-15', '0612345678');
 insert into kassamedewerkers (first_name, last_name, dob) VALUES ('Koffi','Gombo', '1980-01-15');
