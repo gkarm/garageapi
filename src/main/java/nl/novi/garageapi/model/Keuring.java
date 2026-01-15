@@ -4,6 +4,7 @@ package nl.novi.garageapi.model;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "keuringen")
@@ -19,6 +20,9 @@ public class Keuring {
     @ManyToOne
     @JoinColumn(name = "auto_id")
     private Auto auto;
+
+    @OneToMany(mappedBy = "keuring", cascade = CascadeType.ALL)
+    private List<Tekortkoming> tekortkomingen;
 
     private Date datum;
 
