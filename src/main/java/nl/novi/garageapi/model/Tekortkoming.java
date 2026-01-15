@@ -14,6 +14,9 @@ public class Tekortkoming {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    private Keuring keuring;
+
 
     public Long getId() {
         return id;
