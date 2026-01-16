@@ -33,6 +33,9 @@ public class Reparatie {
     @OneToOne
     private Bon bon;
 
+    @ManyToOne
+    private Auto auto;
+
     @OneToMany(mappedBy = "reparatie", cascade = CascadeType.ALL)
     private List<GebruiktOnderdeel> gebruikteOnderdelen;
 
