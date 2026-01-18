@@ -1,10 +1,7 @@
 package nl.novi.garageapi.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Bon {
@@ -18,6 +15,12 @@ public class Bon {
     private double keuringBedrag;
     private double handelingenBedrag;
     private double onderdelenBedrag;
+
+    @OneToOne
+    private Reparatie reparatie;
+
+    @ManyToOne
+    private KassaMedewerker kassaMedewerker;
 
 
     public Bon(Long id, double bedrag, double totaalBedragInclusiefBtw, double keuringBedrag, double handelingenBedrag, double onderdelenBedrag) {
