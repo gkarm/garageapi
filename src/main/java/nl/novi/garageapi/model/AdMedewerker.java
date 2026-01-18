@@ -1,7 +1,6 @@
 package nl.novi.garageapi.model;
 
-//public class AdMedewerker {
-//}
+
 
 import jakarta.persistence.*;
 

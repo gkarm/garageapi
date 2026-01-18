@@ -1,9 +1,6 @@
 package nl.novi.garageapi.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Handeling {
@@ -13,6 +10,9 @@ public class Handeling {
 
     private String naam;
     private double prijs;
+
+    @ManyToOne
+    private BoMedewerker boMedewerker;
 
     public Handeling(Long id, String naam, double prijs) {
         this.id = id;
