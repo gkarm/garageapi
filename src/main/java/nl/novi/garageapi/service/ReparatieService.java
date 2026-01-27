@@ -142,14 +142,13 @@ public class ReparatieService {
         Reparatie reparatie = repos.findById(reparatieId).orElse(null);
         Onderdeel onderdeel = onderdeelService.getOnderdeelById(onderdeelId);
 
-        if (reparatie != null && onderdeel != null) {
-            GebruiktOnderdeel gebruiktOnderdeel = new GebruiktOnderdeel();
-            gebruiktOnderdeel.setReparatie(reparatie);
-            gebruiktOnderdeel.setOnderdeel(onderdeel);
-            gebruiktOnderdeelRepository.save(gebruiktOnderdeel);
+        List<Onderdeel> OnderdeelLijst = reparatie.getOnderdelen();
+        OnderdeelLijst.add(onderdeel);
+        reparatie.setOnderdelen(OnderdeelLijst);
+        repos.save(reparatie);
 
 
-        }
+
     }
     public void voegGebruikteHandelingToeAanReparatie(Long reparatieId, Long handelingId) {
         Reparatie reparatie = repos.findById(reparatieId).orElse(null);

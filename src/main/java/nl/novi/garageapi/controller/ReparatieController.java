@@ -65,9 +65,7 @@ public class ReparatieController {
         service.setReparatieNietUitvoeren(id);
         return ResponseEntity.ok().build();
 
-        /* monteur kan reparatie op "niet uitvoeren" door een PUT verzoek te
-        sturen naar '/reparaties/{reparatieId}/niet-uitvoeren'
-         */
+
     }
     @PutMapping("/{reparatieId}/toevoegen")
     public ResponseEntity<Void> voegOnderdeelEnHandelingToeAanReparatie(@PathVariable Long reparatieId,
