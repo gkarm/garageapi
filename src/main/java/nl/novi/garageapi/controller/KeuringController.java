@@ -19,11 +19,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/keuringen")
 public class KeuringController {
-    @Autowired
+//    @Autowired
     private final KeuringService service;
 
-    public KeuringController(KeuringService keuringService) {
-        this.service = keuringService;
+    @Autowired
+//    public KeuringController(KeuringService keuringService) {
+//        this.service = keuringService;
+//    }
+    public KeuringController(KeuringService service) {
+        this.service = service;
     }
 
     @GetMapping
