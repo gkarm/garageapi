@@ -22,7 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/monteurs")
 public class MonteurController {
-    @Autowired
+
     private final MonteurService service;
 
     public MonteurController(MonteurService service) {
@@ -47,7 +47,7 @@ public class MonteurController {
 
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Object> createMonteur(@AuthenticationPrincipal MyUserDetails myUserDetails, @Valid @RequestBody MonteurDto monteurDto, BindingResult br) {
 
         if (br.hasFieldErrors()) {
@@ -74,7 +74,7 @@ public class MonteurController {
         }
     }
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Monteur> updateMonteur(@PathVariable Long id, @RequestBody Monteur monteur) {
         Monteur updatedMonteur = service.updateMonteur(id, monteur);
         if (updatedMonteur != null) {
@@ -84,7 +84,7 @@ public class MonteurController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Void> deleteMonteur(@PathVariable Long id) {
         service.deleteMonteur(id);
         return ResponseEntity.noContent().build();
