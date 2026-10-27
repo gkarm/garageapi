@@ -9,14 +9,13 @@ import nl.novi.garageapi.exception.ForbiddenException;
 import nl.novi.garageapi.model.Monteur;
 import nl.novi.garageapi.repository.MonteurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class MonteurService {
-    @Autowired
-
 
     private final MonteurRepository repos;
 
@@ -31,6 +30,7 @@ public class MonteurService {
         this.repos = repos;
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     public MonteurDto createMonteur(MyUserDetails myUserDetails, MonteurDto monteurDto) {
         if (!myUserDetails.getUserRole().contains(UserRole.ADMIN)) {
             throw new ForbiddenException("You are logged in as "+myUserDetails.getUsername()+" But you are not authorized ");
@@ -45,6 +45,7 @@ public class MonteurService {
         return monteurDto;
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Monteur updateMonteur(Long id, Monteur monteur) {
         if (repos.existsById(id)) {
             monteur.getId();
@@ -53,6 +54,7 @@ public class MonteurService {
         return null;
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteMonteur(Long id) {
         repos.deleteById(id);
     }

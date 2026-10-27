@@ -36,18 +36,54 @@ public class KeuringController {
         return new ResponseEntity<>(keuringen, HttpStatus.OK);
     }
 
+//    @GetMapping("/{id}")
+//    public ResponseEntity<KeuringDto> getKeuringById(@PathVariable Long id) {
+//        Keuring keuring = service.getKeuringById(id);
+//        if (keuring == null) {
+//            return ResponseEntity.notFound().build();
+//        }
+//        KeuringDto dto = service.keuringDtoFromKeuring(keuring);
+//        return ResponseEntity.ok(dto);
+//    }
+
+
     @GetMapping("/{id}")
     public ResponseEntity<KeuringDto> getKeuringById(@PathVariable Long id) {
-        Keuring keuring = service.getKeuringById(id);
-        if (keuring == null) {
+        KeuringDto dto = service.getKeuringDtoById(id);
+        if (dto == null) {
             return ResponseEntity.notFound().build();
         }
-        KeuringDto dto = service.keuringDtoFromKeuring(keuring);
         return ResponseEntity.ok(dto);
     }
 
+
+
+//    @PostMapping
+//    public ResponseEntity<Object> addKeuring(@Valid @RequestBody Keuring keuringDto, BindingResult br) {
+//        if (br.hasFieldErrors()) {
+//            StringBuilder sb = new StringBuilder();
+//            for (FieldError fe : br.getFieldErrors()) {
+//                sb.append(fe.getField());
+//                sb.append(" : ");
+//                sb.append(fe.getDefaultMessage());
+//                sb.append("\n");
+//            }
+//            return ResponseEntity.badRequest().body(sb.toString());
+//        } else {
+//            keuringDto = service.addKeuring(keuringDto);
+//
+//            URI uri = URI.create(
+//                    ServletUriComponentsBuilder
+//                            .fromCurrentRequest()
+//                            .path("/" + keuringDto).toUriString());
+//            return ResponseEntity.created(uri).body(keuringDto);
+//
+//        }
+//    }
+
+
     @PostMapping
-    public ResponseEntity<Object> addKeuring(@Valid @RequestBody Keuring keuringDto, BindingResult br) {
+    public ResponseEntity<Object> addKeuring(@Valid @RequestBody KeuringDto keuringDto, BindingResult br) {
         if (br.hasFieldErrors()) {
             StringBuilder sb = new StringBuilder();
             for (FieldError fe : br.getFieldErrors()) {
@@ -58,16 +94,35 @@ public class KeuringController {
             }
             return ResponseEntity.badRequest().body(sb.toString());
         } else {
-            keuringDto = service.addKeuring(keuringDto);
+            KeuringDto createdDto = service.addKeuring(keuringDto);
 
-            URI uri = URI.create(
-                    ServletUriComponentsBuilder
-                            .fromCurrentRequest()
-                            .path("/" + keuringDto).toUriString());
-            return ResponseEntity.created(uri).body(keuringDto);
+            URI uri = ServletUriComponentsBuilder
+                    .fromCurrentRequest()
+                    .path("/{id}")
+                    .buildAndExpand(createdDto.getId())
+                    .toUri();
 
+            return ResponseEntity.created(uri).body(createdDto);
         }
     }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<KeuringDto> updateKeuring(@PathVariable Long id, @Valid @RequestBody KeuringDto keuringDto) {
+        KeuringDto updatedDto = service.updateKeuring(id, keuringDto);
+        if (updatedDto == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(updatedDto);
+    }
+
+
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Void> deleteKeuring(@PathVariable Long id) throws Exception {
+//        service.deleteKeuring(id);
+//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteKeuring(@PathVariable Long id) throws Exception {
         service.deleteKeuring(id);
