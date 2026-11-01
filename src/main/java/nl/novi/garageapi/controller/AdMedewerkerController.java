@@ -11,10 +11,7 @@ import nl.novi.garageapi.service.AdMedewerkerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -31,6 +28,18 @@ public class AdMedewerkerController {
     public AdMedewerkerController(AdMedewerkerService service) {
         this.service = service;
     }
+
+    @GetMapping
+    public List<AdMedewerker> getAllAdMedewerkers() {
+        return service.getAllAdMedewerkers();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AdMedewerker> getAdMedewerkerById(@PathVariable Long id) {
+        AdMedewerker medewerker = service.getAdMedewerkerById(id);
+        return medewerker == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(medewerker);
+    }
+
 
     @PostMapping
     public ResponseEntity<Object> createAdMedewerker(@Valid @RequestBody AdMedewerkerDto adMedewerkerDto, BindingResult br) {
@@ -52,4 +61,24 @@ public class AdMedewerkerController {
             return ResponseEntity.created(uri).body(adMedewerkerDto);
         }
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateAdMedewerker(@PathVariable Long id, @Valid @RequestBody AdMedewerkerDto dto, BindingResult br) {
+        if (br.hasFieldErrors()) return ResponseEntity.badRequest().build();
+        AdMedewerker updated = service.updateAdMedewerker(id, dto);
+        return updated == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(updated);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAdMedewerker(@PathVariable Long id) {
+        return service.deleteAdMedewerker(id) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    }
+
+    private String validationErrors(BindingResult br) {
+        StringBuilder sb = new StringBuilder();
+        for (FieldError error : br.getFieldErrors()) {
+            sb.append(error.getField()).append(" : ").append(error.getDefaultMessage()).append("\n");
+        }
+        return sb.toString();
+    }
+
 }
