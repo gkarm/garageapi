@@ -89,7 +89,7 @@ public class OnderdeelController {
         this.service = onderdeelService;
     }
 
-    // --- Helper methods for conversion ---
+
     private OnderdeelDto toDto(Onderdeel entity) {
         OnderdeelDto dto = new OnderdeelDto();
         dto.setId(entity.getId());
@@ -104,11 +104,11 @@ public class OnderdeelController {
         entity.setOnderdeelName(dto.getOnderdeelName());
         entity.setPrijs(dto.getPrijs());
         entity.setVoorraad(dto.getVoorraad());
-        // id is not set here because it's either generated (POST) or set separately for PUT
+
         return entity;
     }
 
-    // --- Endpoints ---
+
 
     @GetMapping
     public ResponseEntity<List<OnderdeelDto>> getAllOnderdelen() {
@@ -130,24 +130,18 @@ public class OnderdeelController {
 
     @PostMapping
     public ResponseEntity<OnderdeelDto> addOnderdeel(@RequestBody OnderdeelDto dto) {
-        // Convert DTO to entity (without id)
         Onderdeel entity = toEntity(dto);
-        // Save via service
         Onderdeel savedEntity = service.addOnderdeel(entity);
-        // Convert saved entity (with generated id) to DTO and return
         return new ResponseEntity<>(toDto(savedEntity), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<OnderdeelDto> updateOnderdeel(@PathVariable Long id, @RequestBody OnderdeelDto dto) {
-        // Check if entity exists
         if (service.getOnderdeelById(id) == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        // Convert DTO to entity and set the ID from path
         Onderdeel entity = toEntity(dto);
         entity.setId(id);
-        // Perform update via service
         Onderdeel updatedEntity = service.updateOnderdeel(id, entity);
         return new ResponseEntity<>(toDto(updatedEntity), HttpStatus.OK);
     }
