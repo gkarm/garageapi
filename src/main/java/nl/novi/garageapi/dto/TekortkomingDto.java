@@ -2,64 +2,55 @@ package nl.novi.garageapi.dto;
 
 
 
-import lombok.Getter;
-import lombok.Setter;
-import nl.novi.garageapi.model.Tekortkoming;
-import nl.novi.garageapi.repository.AutoRepository;
+public class TekortkomingDto {
 
-public class TekortkomingDto extends Tekortkoming {
-
-
-    private final AutoRepository autoRepository;
-    @Getter
     private Long id;
-    @Setter
-    @Getter
+    private String beschrijving;
+    private String oplossing;
     private Long autoId;
 
 
-    @Setter
-    @Getter
-    private String beschrijving;
-    @Setter
-    @Getter
-    private String oplossing;
-
-    public TekortkomingDto(AutoRepository autoRepository) {
-        this.autoRepository = autoRepository;
+    public TekortkomingDto() {
     }
 
 
-    public TekortkomingDto(AutoRepository autoRepository, String beschrijving, String oplossing, Long autoId) {
-        this.autoRepository = autoRepository;
+    public TekortkomingDto(Long id, String beschrijving, String oplossing, Long autoId) {
+        this.id = id;
         this.beschrijving = beschrijving;
         this.oplossing = oplossing;
         this.autoId = autoId;
-
     }
 
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public AutoRepository getAutoRepository() {
-        return autoRepository;
-    }
 
     public Long getId() {
         return id;
     }
 
-    public Long getAutoId() {
-        return autoId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getBeschrijving() {
         return beschrijving;
     }
 
+    public void setBeschrijving(String beschrijving) {
+        this.beschrijving = beschrijving;
+    }
+
     public String getOplossing() {
         return oplossing;
+    }
+
+    public void setOplossing(String oplossing) {
+        this.oplossing = oplossing;
+    }
+
+    public Long getAutoId() {
+        return autoId;
+    }
+
+    public void setAutoId(Long autoId) {
+        this.autoId = autoId;
     }
 }
